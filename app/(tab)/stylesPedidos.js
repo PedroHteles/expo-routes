@@ -47,7 +47,7 @@ export const Name = styled.Text.attrs({
 `;
 
 export const OrderDetails = styled.View`
-  padding: 5px;
+  padding: 25px;
   margin: 2px 0
 `;
 
@@ -62,6 +62,7 @@ export const Order = styled.Text`
 `;
 
 export const Evaluation = styled.View`
+  padding: 25px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -72,6 +73,7 @@ export const Evaluation = styled.View`
 `;
 
 export const Message = styled.Text`
+  padding: 25px;
   font-size: 16px;
   color: #999
 `;

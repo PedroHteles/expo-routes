@@ -1,6 +1,7 @@
 import React from 'react';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import Person from '../../components/Header/Person';
+import { View} from 'react-native';
 
 import
   {
@@ -47,8 +48,8 @@ export default function Profile({ navigation }) {
             color="#333"
           />
           <Info>
-            <Title>Carteira</Title>
-            <Description>Meu saldo e QR Code</Description>
+            <Title>Configurações </Title>
+            <Description>Minhas configurações</Description>
           </Info>
           <MaterialIcons
             name="keyboard-arrow-right"
@@ -56,24 +57,6 @@ export default function Profile({ navigation }) {
             size={20}
           />
         </Option>
-
-        <Option onPress={() => {}}>
-          <MaterialCommunityIcons
-            name="ticket-outline"
-            size={35}
-            color="#333"
-          />
-          <Info>
-            <Title>Cupons</Title>
-            <Description>Meus cupons de desconto</Description>
-          </Info>
-          <MaterialIcons
-            name="keyboard-arrow-right"
-            color="#999"
-            size={20}
-          />
-        </Option>
-
         <Option onPress={() => {}}>
           <MaterialCommunityIcons
             name="heart-outline"
@@ -145,22 +128,6 @@ export default function Profile({ navigation }) {
 
         <AdditionalOption>
           <Wrapper>
-            <MaterialCommunityIcons
-              name="settings-outline"
-              size={35}
-              color="#CDC"
-            />
-            <OptionName>Configurações</OptionName>
-          </Wrapper>
-          <MaterialIcons
-            name="keyboard-arrow-right"
-            color="#999"
-            size={20}
-          />
-        </AdditionalOption>
-
-        <AdditionalOption>
-          <Wrapper>
             <MaterialIcons
               name="security"
               size={35}
@@ -182,7 +149,7 @@ export default function Profile({ navigation }) {
               size={35}
               color="#CDC"
             />
-            <OptionName>Sugerir Restaurantes</OptionName>
+            <OptionName>Sugerir Lojas</OptionName>
           </Wrapper>
           <MaterialIcons
             name="keyboard-arrow-right"

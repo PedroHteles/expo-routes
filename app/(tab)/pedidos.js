@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
-
+import { View} from 'react-native';
 
 import faker from 'faker';
 
@@ -50,7 +50,7 @@ export default function Purchases() {
   async function loadPurchases() {
     // Obter dados da rota 'purchases' da api fake
     // const response = await api.get('purchases');
-    const fakePurchases = Array.from({ length: 10 }, generatePurchase);
+    const fakePurchases = Array.from({ length: 15 }, generatePurchase);
     setPurchases(fakePurchases);
 
     // setPurchases(response.data);
@@ -68,38 +68,41 @@ export default function Purchases() {
               <Order>{ item.order }</Order>
             </OrderDetails>
             <Evaluation>
+              <View style={{flexDirection:`row`,alignItems:`center`}}>
               <Message>Avaliação do pedido</Message>
               <Star>
                 <MaterialIcons
                   name="star"
                   color="#FFCD32"
-                  size={20}
+                  size={15}
                 />
 
                 <MaterialIcons
                   name="star"
                   color="#FFCD32"
-                  size={20}
+                  size={15}
                 />
 
                 <MaterialIcons
                   name="star"
                   color="#FFCD32"
-                  size={20}
+                  size={15}
                 />
 
                 <MaterialIcons
                   name="star"
                   color="#FFCD32"
-                  size={20}
+                  size={15}
                 />
 
                 <MaterialIcons
                   name="star"
                   color="#FFCD32"
-                  size={20}
+                  size={15}
                 />
               </Star>
+              </View>
+
             </Evaluation>
             <Menu>
               <MenuButton>
