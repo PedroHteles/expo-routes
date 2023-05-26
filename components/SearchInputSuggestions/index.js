@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { TextInput, FlatList, View, Text, TouchableOpacity } from 'react-native'
 
-const SearchInput = ({ suggestionsData, onSelectSuggestion }) => {
+const SearchInput = ({ placeholderInput, suggestionsData, onSelectSuggestion }) => {
   const [searchText, setSearchText] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
 
@@ -18,6 +18,10 @@ const SearchInput = ({ suggestionsData, onSelectSuggestion }) => {
     }
   }
 
+  const filteredSuggestions = suggestionsData.filter(
+    (item) => item.toLowerCase().startsWith(searchText.toLowerCase())
+  )
+
   const renderSuggestion = ({ item }) => (
     <TouchableOpacity onPress={() => handleSuggestionPress(item)}>
       <Text>{item}</Text>
@@ -28,14 +32,14 @@ const SearchInput = ({ suggestionsData, onSelectSuggestion }) => {
     <View>
       <TextInput
         style={{ borderWidth: 1, padding: 10 }}
-        placeholder="Digite sua pesquisa"
+        placeholder={placeholderInput}
         value={searchText}
         onChangeText={handleSearchTextChange}
       />
 
       {showSuggestions && (
         <FlatList
-          data={suggestionsData}
+          data={filteredSuggestions}
           renderItem={renderSuggestion}
           keyExtractor={(item) => item}
         />

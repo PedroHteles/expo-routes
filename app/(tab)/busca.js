@@ -11,6 +11,8 @@ export default function Home() {
   const [unidadeMedia, setUnidadeMedia] = useState("")
   const [items, setItems] = useState([])
   const [categorias, setCategorias] = useState([])
+  const [produtos, setProdutos] = useState([])
+
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("")
 
   React.useEffect(() => {
@@ -19,12 +21,15 @@ export default function Home() {
 
   const buscaCategorias = async () => {
     const res = await api.get("/categoria")
+    const resProduto = await api.get("/produto")
+    setProdutos(resProduto.data)
     setCategorias(res.data)
   }
 
-  const suggestions = ['Sugestão 1', 'Sugestão 2', 'Sugestão 3', 'Sugestão 4', 'Sugestão 5']
+  const suggestions = produtos.map(item => item.nome)
 
   const handleSelectSuggestion = (suggestion) => {
+    setNome(suggestion)
     console.log('Sugestão selecionada:', suggestion)
     // Faça o que quiser com a sugestão selecionada
   }
@@ -59,12 +64,7 @@ export default function Home() {
           <Picker.Item key={categoria.id} label={categoria.nome} value={categoria.nome} />
         ))}
       </Picker>
-      <SearchInput suggestionsData={suggestions} onSelectSuggestion={handleSelectSuggestion} />
-      <TextInput
-        placeholder="Infome o nome do produto"
-        value={nome}
-        onChangeText={setNome}
-      />
+      <SearchInput placeholderInput="Infome o nome do produto" suggestionsData={suggestions} onSelectSuggestion={handleSelectSuggestion} />
       <TextInput
         placeholder="Quantidade"
         value={quantidade}
