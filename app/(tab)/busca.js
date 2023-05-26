@@ -22,6 +22,14 @@ export default function Home() {
     setCategorias(res.data)
   }
 
+  const suggestions = ['Sugestão 1', 'Sugestão 2', 'Sugestão 3', 'Sugestão 4', 'Sugestão 5']
+
+  const handleSelectSuggestion = (suggestion) => {
+    console.log('Sugestão selecionada:', suggestion)
+    // Faça o que quiser com a sugestão selecionada
+  }
+
+
   const addItem = () => {
     setItems([
       ...items,
@@ -51,7 +59,7 @@ export default function Home() {
           <Picker.Item key={categoria.id} label={categoria.nome} value={categoria.nome} />
         ))}
       </Picker>
-      < SearchInput />
+      <SearchInput suggestionsData={suggestions} onSelectSuggestion={handleSelectSuggestion} />
       <TextInput
         placeholder="Infome o nome do produto"
         value={nome}

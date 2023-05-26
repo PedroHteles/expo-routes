@@ -1,15 +1,7 @@
 import React, { useState } from 'react'
 import { TextInput, FlatList, View, Text, TouchableOpacity } from 'react-native'
 
-const suggestions = [
-  'Sugestão 1',
-  'Sugestão 2',
-  'Sugestão 3',
-  'Sugestão 4',
-  'Sugestão 5',
-]
-
-const SearchInput = () => {
+const SearchInput = ({ suggestionsData, onSelectSuggestion }) => {
   const [searchText, setSearchText] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
 
@@ -21,6 +13,9 @@ const SearchInput = () => {
   const handleSuggestionPress = (suggestion) => {
     setSearchText(suggestion)
     setShowSuggestions(false)
+    if (onSelectSuggestion) {
+      onSelectSuggestion(suggestion)
+    }
   }
 
   const renderSuggestion = ({ item }) => (
@@ -40,7 +35,7 @@ const SearchInput = () => {
 
       {showSuggestions && (
         <FlatList
-          data={suggestions}
+          data={suggestionsData}
           renderItem={renderSuggestion}
           keyExtractor={(item) => item}
         />
