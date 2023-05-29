@@ -12,21 +12,35 @@ export default function Home() {
   const [items, setItems] = useState([])
   const [categorias, setCategorias] = useState([])
   const [produtos, setProdutos] = useState([])
-
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("")
+
+  const suggestions = produtos.map(item => item.nome)
+
 
   React.useEffect(() => {
     buscaCategorias()
   }, [])
 
+  React.useEffect(() => {
+    buscaProdutos()
+  }, [categoriaSelecionada])
+
   const buscaCategorias = async () => {
     const res = await api.get("/categoria")
-    const resProduto = await api.get("/produto")
-    setProdutos(resProduto.data)
     setCategorias(res.data)
   }
+  
+  const buscaProdutos = async () => {
+    console.log(`/produto/categoria/${categoriaSelecionada.id}`)
+    const res = await api.get(`/produto/categoria/${categoriaSelecionada.id}`)
+    setProdutos(res.data)
+  }
 
-  const suggestions = produtos.map(item => item.nome)
+
+  const buscaOrçamento = async () => {
+    const res = await api.get("/produto/orcamento",items)
+    console.log(res.data)
+  }
 
   const handleSelectSuggestion = (suggestion) => {
     setNome(suggestion)
@@ -43,7 +57,7 @@ export default function Home() {
         quantidade: quantidade,
         preferenciaMarca: preferenciaMarca,
         unidadeMedia: unidadeMedia,
-        categoria: categoriaSelecionada,
+        categoria: categoriaSelecionada.id,
       },
     ])
     setNome("")
@@ -54,23 +68,25 @@ export default function Home() {
   }
 
   return (
-    <View style={{ padding: 20 }}>
+    <ScrollView >
       <Picker
         placeholder='Selecione a categoria do produto'
         selectedValue={categoriaSelecionada}
         onValueChange={(itemValue) => setCategoriaSelecionada(itemValue)}
-      >
+        >
         {categorias.map((categoria) => (
-          <Picker.Item key={categoria.id} label={categoria.nome} value={categoria.nome} />
+          <Picker.Item key={categoria.id} label={categoria.nome} value={categoria} />
         ))}
       </Picker>
       <SearchInput placeholderInput="Infome o nome do produto" suggestionsData={suggestions} onSelectSuggestion={handleSelectSuggestion} />
       <TextInput
+           style={{ borderWidth: 1, padding: 10 }}
         placeholder="Quantidade"
         value={quantidade}
         onChangeText={setQuantidade}
       />
       <TextInput
+           style={{ borderWidth: 1, padding: 10 }}
         placeholder="Preferência de Marca"
         value={preferenciaMarca}
         onChangeText={setPreferenciaMarca}
@@ -95,6 +111,8 @@ export default function Home() {
           </View>
         ))}
       </ScrollView>
-    </View>
+      <Button title="Pesquisar" onPress={buscaOrçamento} />
+
+    </ScrollView>
   )
 }

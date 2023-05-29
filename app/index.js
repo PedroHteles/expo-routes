@@ -11,11 +11,16 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
 
 
-  const handleLogin = () => {
+  const handleLogin = async () =>   {
     // Aqui você pode implementar a lógica de autenticação
     // Verificar o email e senha fornecidos, fazer chamadas à API, etc.
+
+    const res = await api.get("/categoria")
+    setCategorias(res.data)
+
     console.log('Email:', email);
     console.log('Password:', password);
+    router.push("/inicio");
   };
 
   const handleGoogleLogin = () => {
@@ -47,7 +52,7 @@ const LoginScreen = () => {
             onChangeText={setPassword}
           />
         <Link href="/registerScreen">Registar</Link>
-        <TouchableOpacity style={{marginVertical:70 ,   borderRadius: 4, paddingVertical: 12,  backgroundColor: '#3b5998',}} onPress={() =>{  router.push("/inicio");}}>
+        <TouchableOpacity style={{marginVertical:70 ,   borderRadius: 4, paddingVertical: 12,  backgroundColor: '#3b5998',}} onPress={() =>{handleLogin}}>
           <Text style={styles.socialButtonText}>Entrar</Text>
         </TouchableOpacity>
         </View>
