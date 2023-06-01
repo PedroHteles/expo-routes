@@ -55,14 +55,6 @@ const LoginScreen = () => {
           <Text style={styles.socialButtonText}>Entrar</Text>
         </TouchableOpacity>
         </View>
-        <View style={{marginTop:50}}>
-        <TouchableOpacity style={styles.socialButton} onPress={handleGoogleLogin}>
-          <Text style={styles.socialButtonText}>Entrar com Google</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.socialButton} onPress={handleFacebookLogin}>
-          <Text style={styles.socialButtonText}>Entrar com Facebook</Text>
-        </TouchableOpacity>
-        </View>
       </View>
     </View>
   );
