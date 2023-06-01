@@ -5,7 +5,7 @@ import axios from 'axios'
 export const api = axios.create({
   // baseURL: "http://localhost:5000/api",
   // baseURL: "http://teste.teste.com.br/api",
-  baseURL: "https://39b8-189-15-169-34.sa.ngrok.io/api",
+  baseURL: " https://15ae-179-104-247-70.sa.ngrok.io/api",
   timeout: 7000,
 })
 

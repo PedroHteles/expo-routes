@@ -3,6 +3,7 @@ import { View, TextInput, Button, TouchableOpacity, Text, StyleSheet } from 'rea
 import { FontAwesome } from '@expo/vector-icons';
 import {Link,} from 'expo-router'
 import { useRouter } from "expo-router";
+import { api } from '../services';
 const LoginScreen = () => {
 
   const router = useRouter();
@@ -15,12 +16,10 @@ const LoginScreen = () => {
     // Aqui você pode implementar a lógica de autenticação
     // Verificar o email e senha fornecidos, fazer chamadas à API, etc.
 
-    const res = await api.get("/categoria")
-    setCategorias(res.data)
-
-    console.log('Email:', email);
-    console.log('Password:', password);
-    router.push("/inicio");
+    const res = await api.post(`/auth/login&email=${email}?password=${password}`)
+    if(res.status == 200) {
+      router.push("/inicio");
+    }
   };
 
   const handleGoogleLogin = () => {
@@ -52,7 +51,7 @@ const LoginScreen = () => {
             onChangeText={setPassword}
           />
         <Link href="/registerScreen">Registar</Link>
-        <TouchableOpacity style={{marginVertical:70 ,   borderRadius: 4, paddingVertical: 12,  backgroundColor: '#3b5998',}} onPress={() =>{handleLogin}}>
+        <TouchableOpacity style={{marginVertical:70 ,   borderRadius: 4, paddingVertical: 12,  backgroundColor: '#3b5998',}} onPress={handleLogin}>
           <Text style={styles.socialButtonText}>Entrar</Text>
         </TouchableOpacity>
         </View>
