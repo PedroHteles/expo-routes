@@ -13,13 +13,19 @@ const LoginScreen = () => {
 
 
   const handleLogin = async () =>   {
-    // Aqui você pode implementar a lógica de autenticação
-    // Verificar o email e senha fornecidos, fazer chamadas à API, etc.
-
-    const res = await api.post(`/auth/login&email=${email}?password=${password}`)
-    if(res.status == 200) {
-      router.push("/inicio");
+    try {
+      const response = await api.post('/auth/login', {
+        email: email,
+        password: password
+      });
+        if(response.status == 200) {
+          router.push("/inicio");
+        }
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
     }
+
   };
 
   const handleGoogleLogin = () => {
